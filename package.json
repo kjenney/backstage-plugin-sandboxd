@@ -1,0 +1,31 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "yarn workspaces foreach -A --include '@internal/backstage-plugin-sandboxd-frontend' -v -i run start",
+    "start-backend": "yarn workspaces foreach -A --include '@internal/backstage-plugin-sandboxd-backend' -v -i run start",
+    "tsc": "tsc",
+    "tsc:all": "tsc -b tsconfig.workspaces.json",
+    "build": "backstage-cli package build",
+    "build:all": "backstage-cli package build --all",
+    "clean": "backstage-cli package clean",
+    "test": "backstage-cli package test",
+    "lint": "backstage-cli package lint",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write ."
+  },
+  "devDependencies": {
+    "@backstage/cli": "^0.27.0",
+    "@spotify/prettier-config": "^12.0.0",
+    "typescript": "~5.2.0"
+  },
+  "prettier": "@spotify/prettier-config"
+}
