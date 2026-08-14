@@ -36,6 +36,7 @@
     "@backstage/backend-plugin-api": "^1.0.0",
     "@backstage/config": "^1.2.0",
     "express": "^4.21.0",
+    "express-promise-router": "^4.1.0",
     "node-fetch": "^2.7.0",
     "winston": "^3.11.0",
     "yn": "^4.0.0"

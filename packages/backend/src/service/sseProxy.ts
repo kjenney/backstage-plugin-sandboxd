@@ -1,14 +1,12 @@
 import express from 'express';
 import { Config } from '@backstage/config';
 import * as http from 'http';
-import { createLogger } from '@backstage/backend-plugin-api';
 
 /**
  * SSE Proxy handler — forwards Server-Sent Events from sandboxd to Backstage frontend.
  *
  * sandboxd streams agent task progress via SSE. This handler establishes
- * a WebSocket-compatible connection to sandboxd and pipes events through
- * to the Backstage frontend.
+ * a connection to sandboxd and pipes events through to the Backstage frontend.
  *
  * @param options - Plugin options including Backstage config
  * @returns Express route handler for SSE proxy
@@ -16,7 +14,7 @@ import { createLogger } from '@backstage/backend-plugin-api';
 export function createSseProxyHandler(
   options: { config: Config },
 ): express.RequestHandler {
-  const logger = createLogger();
+  const logger = console;
   const { baseUrl, token } = readConfig(options.config);
 
   return async (req, res) => {

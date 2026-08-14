@@ -1,4 +1,3 @@
-import { createLogger } from '@backstage/backend-plugin-api';
 import { Config } from '@backstage/config';
 import * as http from 'http';
 
@@ -8,7 +7,7 @@ import * as http from 'http';
  * Periodically checks if sandboxd is reachable and caches the result.
  */
 export class SandboxdHealthCheck {
-  private logger = createLogger();
+  private logger = console;
   private baseUrl: string;
   private intervalMs: number;
   private timer: NodeJS.Timer | null = null;

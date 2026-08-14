@@ -11,3 +11,11 @@ export { AppListView } from './components/AppListView';
 export { CodeEditor } from './components/CodeEditor';
 export { Terminal } from './components/Terminal';
 export { SettingsPanel } from './components/SettingsPanel';
+export {
+  SANDBOXD_ANNOTATIONS,
+  SANDBOXD_ANNOTATION_PREFIX,
+  parseSandboxdAnnotations,
+  type SandboxdEntityConfig,
+  type SandboxdAnnotationKey,
+} from './annotations';
+export { SandboxStatusWidget } from './components/SandboxStatusWidget';

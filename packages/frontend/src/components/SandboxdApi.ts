@@ -101,6 +101,39 @@ export function useSandboxdRestartApp() {
 }
 
 /**
+ * Destroy a sandboxd app (permanent deletion).
+ */
+export function useSandboxdDestroyApp() {
+  return async (entityName: string) => {
+    return sandboxdFetch(`/entities/${entityName}/sandbox/destroy`, {
+      method: 'POST',
+    });
+  };
+}
+
+/**
+ * Put a sandbox to sleep (frees memory, wakes on next request).
+ */
+export function useSandboxdSleepApp() {
+  return async (entityName: string) => {
+    return sandboxdFetch(`/entities/${entityName}/sandbox/sleep`, {
+      method: 'POST',
+    });
+  };
+}
+
+/**
+ * Wake a sleeping sandbox.
+ */
+export function useSandboxdWakeApp() {
+  return async (entityName: string) => {
+    return sandboxdFetch(`/entities/${entityName}/sandbox/wake`, {
+      method: 'POST',
+    });
+  };
+}
+
+/**
  * Fetch the file tree for a given entity.
  */
 export function useSandboxdFileTree(entityName: string) {

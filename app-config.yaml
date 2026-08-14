@@ -12,9 +12,23 @@ backend:
     credentials: true
 
 sandboxd:
+  # The base URL of the sandboxd control-plane API (default: localhost:9090)
   baseUrl: 'http://localhost:9090'
-  # Use environment variable SANDBOXD_API_TOKEN for authentication
+
+  # API token for authenticating with sandboxd. If unset, requests are
+  # forwarded without an Authorization header.
+  # Use environment variable SANDBOXD_API_TOKEN to avoid hardcoding.
   token: '${SANDBOXD_API_TOKEN}'
+
+  # How often (ms) to check sandboxd control-plane health. Default: 30000.
+  healthCheckInterval: 30000
+
+  # Automatic sandbox provisioning for entities with sandboxd annotations.
+  autoProvision:
+    # Enable/disable auto-provisioning. Default: true.
+    enabled: true
+    # How often (ms) to check for new entities needing provisioning. Default: 120000 (2 min).
+    intervalMs: 120000
 
 techdocs:
   enabled: false
