@@ -14,7 +14,7 @@
     "access": "public",
     "main": "dist/index.es5.js",
     "module": "dist/index.esm.js",
-    "types": "dist/index.d.ts"
+    "types": "src/index.ts"
   },
   "homepage": "https://github.com/internal/backstage-plugin-sandboxd",
   "repository": {
