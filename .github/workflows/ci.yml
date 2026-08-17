@@ -1,0 +1,91 @@
+name: CI — Build, Test, and Publish
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [22.x]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Node.js cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+
+      - name: Install dependencies
+        run: |
+          npm ci --ignore-scripts || npm install --ignore-scripts
+
+      - name: Build all packages
+        run: |
+          npx tsc
+          npx backstage-cli package build --role frontend-plugin
+          npx backstage-cli package build --role backend-plugin
+
+      - name: Run frontend tests
+        run: npx backstage-cli package test --watchAll=false --role frontend-plugin
+
+      - name: Run backend tests
+        run: npx backstage-cli package test --watchAll=false --role backend-plugin
+
+      - name: Run lint
+        run: npx backstage-cli package lint --role frontend-plugin && npx backstage-cli package lint --role backend-plugin
+
+  publish:
+    name: Publish Plugin
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: |
+          npm ci --ignore-scripts || npm install --ignore-scripts
+
+      - name: Build all packages
+        run: |
+          npx tsc
+          npx backstage-cli package build --role frontend-plugin
+          npx backstage-cli package build --role backend-plugin
+
+      - name: Publish frontend package
+        run: |
+          cd packages/frontend
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish backend package
+        run: |
+          cd packages/backend
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
