@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 /**
  * Main content component for the sandboxd plugin.
  *
@@ -15,4 +15,4 @@ import React from 'react';
  *
  * Requires the entity to have the sandboxd annotation.
  */
-export declare const SandboxdContent: () => React.JSX.Element;
+export declare const SandboxdContent: () => import("react").JSX.Element;

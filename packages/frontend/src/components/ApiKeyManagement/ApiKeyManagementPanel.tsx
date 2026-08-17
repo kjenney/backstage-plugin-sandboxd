@@ -313,7 +313,7 @@ export const ApiKeyManagementPanel: React.FC = () => {
                     )}
                   </>
                 ) : (
-                  <Chip label="No token" size="small" " />
+                  <Chip label="No token" size="small" />
                 )}
               </Typography>
             </Box>

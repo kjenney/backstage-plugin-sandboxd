@@ -1,5 +1,5 @@
-import React from 'react';
+/// <reference types="react" />
 /**
  * Root page component for the standalone sandboxd plugin route.
  */
-export declare const SandboxdRoot: () => React.JSX.Element;
+export declare const SandboxdRoot: () => import("react").JSX.Element;

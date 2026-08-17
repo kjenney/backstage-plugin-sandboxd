@@ -1,4 +1,4 @@
-import React from 'react';
+/// <reference types="react" />
 /**
  * Standalone App Store page for the sandboxd plugin.
  *
@@ -7,4 +7,4 @@ import React from 'react';
  *   - Deployed: View and manage deployed apps
  *   - Manifest Editor: Write custom runtime manifests
  */
-export declare const SandboxdAppStore: () => React.JSX.Element;
+export declare const SandboxdAppStore: () => import("react").JSX.Element;
