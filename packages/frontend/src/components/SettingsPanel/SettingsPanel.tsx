@@ -10,9 +10,9 @@ import {
   Snackbar,
   MenuItem,
   Divider,
-} from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
-import { Save as SaveIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { Alert } from '@mui/lab';
+import { Save as SaveIcon } from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import {
   useSandboxdSettings,

@@ -8,14 +8,14 @@ import {
   Tooltip,
   CircularProgress,
   IconButton,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   FiberManualRecord as DotIcon,
   PlayArrow as PlayIcon,
   Brightness3 as SleepIcon,
   WbSunny as WakeIcon,
   Refresh as RefreshIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { isSandboxdAvailable } from '../AppCard/isSandboxdAvailable';
 import {

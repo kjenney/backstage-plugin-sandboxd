@@ -20,13 +20,13 @@ import {
   MenuItem,
   IconButton,
   Tooltip,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Add as AddIcon,
   Undo as UndoIcon,
   Refresh as RefreshIcon,
   Stop as StopIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import {
   useAgentTasks,

@@ -16,14 +16,15 @@ import {
   InputLabel,
   Select,
   MenuItem,
-} from '@material-ui/core';
+  SelectChangeEvent,
+} from '@mui/material';
 import {
   Search as SearchIcon,
   Launch as DeployIcon,
   FilterList as FilterIcon,
   Storage as StorageIcon,
   Refresh as RefreshIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   useSandboxdPresets,
   useSandboxdRecipes,
@@ -180,8 +181,8 @@ export const AppStoreView: React.FC = () => {
   }, []);
 
   const handleFilterChange = useCallback(
-    (event: React.ChangeEvent<{ value: unknown }>) => {
-      setCategoryFilter(String(event.target.value));
+    (event: SelectChangeEvent<string>) => {
+      setCategoryFilter(event.target.value as string);
     },
     [],
   );
@@ -306,7 +307,7 @@ export const AppStoreView: React.FC = () => {
           <Chip
             label="Recipes"
             onClick={() => setShowRecipes((s) => !s)}
-            variant={showRecipes ? 'default' : 'outlined'}
+            variant={showRecipes ? 'filled' : 'outlined'}
             style={{ cursor: 'pointer', marginRight: 8 }}
           />
 

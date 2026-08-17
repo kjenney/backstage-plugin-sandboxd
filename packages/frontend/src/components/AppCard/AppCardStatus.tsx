@@ -1,6 +1,6 @@
 import React from 'react';
-import { Chip } from '@material-ui/core';
-import { FiberManualRecord as DotIcon } from '@material-ui/icons';
+import { Chip } from '@mui/material';
+import { FiberManualRecord as DotIcon } from '@mui/icons-material';
 import { SandboxStatus } from '../SandboxdApi';
 
 const STATUS_CONFIG: Record<SandboxStatus, { label: string; color: string }> = {

@@ -15,13 +15,13 @@ import {
   TextField,
   MenuItem,
   Snackbar,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Add as AddIcon,
   Delete as DeleteIcon,
   VpnKey as KeyIcon,
-} from '@material-ui/icons';
-import { Alert } from '@material-ui/lab';
+} from '@mui/icons-material';
+import { Alert } from '@mui/lab';
 import {
   useAgentCredentials,
   useUpdateAgentCredentials,

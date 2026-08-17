@@ -11,13 +11,13 @@ import {
   Card,
   CardContent,
   CardActions,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Code as CodeIcon,
   CheckCircle as CheckCircleIcon,
   Warning as WarningIcon,
   Build as BuildIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   useSandboxdValidateManifest,
   useSandboxdCreateApp,

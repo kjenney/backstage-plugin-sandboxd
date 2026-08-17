@@ -10,8 +10,8 @@ import {
   Chip,
   Tooltip,
   Button,
-} from '@material-ui/core';
-import { OpenInNew as OpenInNewIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import { SandboxApp, SandboxStatus } from '../SandboxdApi';
 import { AppCardStatus } from '../AppCard/AppCardStatus';
 

@@ -9,7 +9,7 @@ import {
   CircularProgress,
   Paper,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   OpenInNew as OpenInNewIcon,
   FileCopy as CopyIcon,
@@ -17,7 +17,7 @@ import {
   FullscreenExit as FullscreenExitIcon,
   WbSunny as WakeIcon,
   Brightness3 as SleepIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { useSandboxdPreviewUrl } from '../ApiKeyManagement/PreviewUrlApi';
 import {

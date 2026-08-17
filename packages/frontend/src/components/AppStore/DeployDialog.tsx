@@ -23,14 +23,14 @@ import {
   ListItemAvatar,
   Avatar,
   Collapse,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Launch as DeployIcon,
   Storage as StorageIcon,
   CheckCircle as CheckCircleIcon,
   ArrowBack as ArrowBackIcon,
   ArrowForward as ArrowForwardIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   SandboxdPreset,
   useSandboxdCreateApp,
@@ -337,7 +337,7 @@ export const DeployWizard: React.FC<DeployWizardProps> = ({
                     />
                   )}
                   {manifestValid === false && (
-                    <Chip label="Invalid" size="small" color="secondary" />
+                    <Chip label="Invalid" size="small" color="error" />
                   )}
                 </Box>
               </Box>

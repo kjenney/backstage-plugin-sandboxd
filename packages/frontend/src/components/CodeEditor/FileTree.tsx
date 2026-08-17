@@ -7,13 +7,13 @@ import {
   Collapse,
   Typography,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Folder as FolderIcon,
   InsertDriveFile as FileIcon,
   ChevronRight as ChevronRightIcon,
   ExpandMore as ChevronDownIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { SandboxFileNode } from '../SandboxdApi';
 
 interface FileTreeProps {
@@ -148,4 +148,4 @@ export const FileTree: React.FC<FileTreeProps> = ({
   );
 };
 
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';

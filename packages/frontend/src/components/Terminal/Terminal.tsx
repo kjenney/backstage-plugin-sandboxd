@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-import { Paper, Typography, Box, CircularProgress, Button } from '@material-ui/core';
-import { Refresh as RefreshIcon } from '@material-ui/icons';
+import { Paper, Typography, Box, CircularProgress, Button } from '@mui/material';
+import { Refresh as RefreshIcon } from '@mui/icons-material';
 import { Terminal as XTerm } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import { useEntity } from '@backstage/plugin-catalog-react';
@@ -179,7 +179,7 @@ export const Terminal: React.FC = () => {
             justifyContent="center"
             style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
           >
-            <CircularProgress color="secondary" />
+            <CircularProgress color="error" />
           </Box>
         )}
         <div ref={containerRef} style={{ width: '100%', height: '100%' }} />

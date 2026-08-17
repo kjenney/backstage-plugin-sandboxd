@@ -5,8 +5,8 @@ import {
   Box,
   CircularProgress,
   Paper,
-} from '@material-ui/core';
-import { Refresh as RefreshIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { Refresh as RefreshIcon } from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { useSandboxdApps } from '../SandboxdApi';
 import { AppListTable } from './AppListTable';

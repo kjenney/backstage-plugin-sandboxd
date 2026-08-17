@@ -7,11 +7,11 @@ import {
   CircularProgress,
   Button,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Close as CloseIcon,
   PlayArrow as PlayArrowIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import {
   useAgentTaskStream,

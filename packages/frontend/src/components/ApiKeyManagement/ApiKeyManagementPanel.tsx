@@ -31,7 +31,7 @@ import {
   TextField,
   Chip,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Create as CreateIcon,
   Delete as DeleteIcon,
@@ -42,8 +42,8 @@ import {
   Person as PersonIcon,
   VpnKey as KeyIcon,
   Group as GroupIcon,
-} from '@material-ui/icons';
-import { Alert } from '@material-ui/lab';
+} from '@mui/icons-material';
+import { Alert } from '@mui/lab';
 import {
   useSandboxdApiKeys,
   useSandboxdCreateApiKey,
@@ -313,7 +313,7 @@ export const ApiKeyManagementPanel: React.FC = () => {
                     )}
                   </>
                 ) : (
-                  <Chip label="No token" size="small" color="default" />
+                  <Chip label="No token" size="small" " />
                 )}
               </Typography>
             </Box>

@@ -6,16 +6,13 @@ import {
   Button,
   CircularProgress,
   Toolbar,
-} from '@material-ui/core';
-import { Save as SaveIcon } from '@material-ui/icons';
+} from '@mui/material';
+import { Save as SaveIcon } from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
-import { EditorView } from '@codemirror/view';
-import { Transaction } from '@codemirror/state';
-import { basicSetup } from '@codemirror/basic-setup';
+import { EditorView, EditorState, basicSetup } from '@codemirror/basic-setup';
 import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import { html } from '@codemirror/lang-html';
-import { EditorState } from '@codemirror/state';
 import { oneDark } from '@codemirror/theme-one-dark';
 import {
   useSandboxdFileTree,
@@ -119,7 +116,7 @@ export const CodeEditor: React.FC = () => {
     const view = new EditorView({
       state,
       parent: editorRef.current,
-      dispatch: (tx: Transaction) => {
+      dispatch: (tx: any) => {
         view.update([tx]);
         if (tx.docChanged) {
           setEditorContent(view.state.doc.toString());

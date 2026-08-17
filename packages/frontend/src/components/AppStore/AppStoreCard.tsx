@@ -10,11 +10,11 @@ import {
   Box,
   Tooltip,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   Launch as OpenInNewIcon,
   Storage as AppIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import { useSandboxdApps } from '../SandboxdApi';
 import {

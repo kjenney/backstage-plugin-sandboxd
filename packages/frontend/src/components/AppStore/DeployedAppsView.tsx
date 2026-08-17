@@ -18,12 +18,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   DeleteForever as DestroyIcon,
   OpenInNew as OpenInNewIcon,
   Refresh as RefreshIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import {
   useSandboxdApps,
   useSandboxdDeleteApp,

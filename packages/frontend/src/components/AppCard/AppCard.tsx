@@ -13,7 +13,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   PlayArrow as PlayIcon,
   Stop as StopIcon,
@@ -22,7 +22,7 @@ import {
   Brightness3 as SleepIcon,
   WbSunny as WakeIcon,
   OpenInNew as OpenInNewIcon,
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import {
   useSandboxdApps,
