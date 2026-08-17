@@ -63,6 +63,31 @@ export const SANDBOXD_ANNOTATIONS = {
    * Used when agent-assisted coding is enabled.
    */
   agentModel: `${SANDBOXD_ANNOTATION_PREFIX}/agent-model`,
+
+  /**
+   * The sandboxd app identifier — set by the entity sync provider when a
+   * sandboxd app is deployed from the App Store. Allows the frontend plugin
+   * to recognize auto-provisioned entities.
+   */
+  appId: `${SANDBOXD_ANNOTATION_PREFIX}/app-id`,
+
+  /**
+   * The app's preview URL — set by the entity sync provider. Enables the
+   * preview button on the entity page.
+   */
+  previewUrl: `${SANDBOXD_ANNOTATION_PREFIX}/preview-url`,
+
+  /**
+   * Current app status from sandboxd (running/sleeping/stopped/starting/error).
+   * Set by the entity sync provider during reconciliation.
+   */
+  status: `${SANDBOXD_ANNOTATION_PREFIX}/status`,
+
+  /**
+   * The preset ID that created this app — set when deploying from a curated
+   * preset in the App Store. Used to display the preset name on entity cards.
+   */
+  presetId: `${SANDBOXD_ANNOTATION_PREFIX}/preset-id`,
 } as const;
 
 /**
@@ -81,6 +106,10 @@ export interface SandboxdEntityConfig {
   sleepTimeout: number | undefined;
   autoProvision: boolean;
   agentModel: string | undefined;
+  appId: string | undefined;
+  previewUrl: string | undefined;
+  status: string | undefined;
+  presetId: string | undefined;
 }
 
 export function parseSandboxdAnnotations(
@@ -94,6 +123,10 @@ export function parseSandboxdAnnotations(
       sleepTimeout: undefined,
       autoProvision: false,
       agentModel: undefined,
+      appId: undefined,
+      previewUrl: undefined,
+      status: undefined,
+      presetId: undefined,
     };
   }
 
@@ -110,6 +143,10 @@ export function parseSandboxdAnnotations(
     autoProvision:
       annotations[SANDBOXD_ANNOTATIONS.autoProvision] === 'true',
     agentModel: annotations[SANDBOXD_ANNOTATIONS.agentModel],
+    appId: annotations[SANDBOXD_ANNOTATIONS.appId],
+    previewUrl: annotations[SANDBOXD_ANNOTATIONS.previewUrl],
+    status: annotations[SANDBOXD_ANNOTATIONS.status],
+    presetId: annotations[SANDBOXD_ANNOTATIONS.presetId],
   };
 }
 
@@ -120,6 +157,16 @@ export function isSandboxdAvailable(
   annotations?: Record<string, string>,
 ): boolean {
   return annotations?.[SANDBOXD_ANNOTATIONS.sandboxdEnabled] === 'true';
+}
+
+/**
+ * Check if an entity was auto-provisioned by the sandboxd entity sync.
+ * Entities created by the entity provider have the app-id annotation set.
+ */
+export function isSandboxdManagedEntity(
+  annotations?: Record<string, string>,
+): boolean {
+  return !!annotations?.[SANDBOXD_ANNOTATIONS.appId];
 }
 
 function parsePositiveInt(value: string | undefined): number | undefined {

@@ -30,5 +30,31 @@ sandboxd:
     # How often (ms) to check for new entities needing provisioning. Default: 120000 (2 min).
     intervalMs: 120000
 
+  # Multi-tenant mode — when enabled, sandboxd routes requests per user
+  # using Backstage identity tokens instead of the shared sandboxd token.
+  # This enables tenant isolation when sandboxd is deployed in multi-tenant mode.
+  multiTenant:
+    # Enable/disable multi-tenant mode. Default: false.
+    # When enabled, each request is authenticated using the Backstage user's
+    # identity token (from identityApi.getIdentity) and routed through the
+    # user's tenant-scoped API key.
+    enabled: false
+    # Backstage user identity claim used to derive the sandboxd tenant.
+    # Default: 'email' — extracts the domain from the user's email
+    # (e.g., user@company.com → company).
+    identityClaim: 'email'
+
+  # Preview URL TTL — how long auth-gated preview URLs are valid (seconds).
+  # Default: 3600 (1 hour).
+  previewUrl:
+    ttl: 3600
+
+  # Entity sync configuration.
+  entitySync:
+    # How often (ms) to sync sandboxd apps to the Backstage catalog. Default: 300000 (5 min).
+    intervalMs: 300000
+    # Default owner for auto-created entities. Default: 'user:sandboxd-service'.
+    owner: 'user:sandboxd-service'
+
 techdocs:
   enabled: false

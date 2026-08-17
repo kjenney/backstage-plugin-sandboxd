@@ -1,0 +1,142 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: sandboxd-ai-app
+  title: AI-Driven App with Sandboxd
+  description: >
+    Create a new application using sandboxd's AI coding agents.
+    Describe what you want to build, and an AI agent will scaffold and build it
+    in a sandbox environment.
+  tags:
+    - sandboxd
+    - ai
+    - agent
+spec:
+  owner: default
+  type: service
+
+  parameters:
+    - title: Application Details
+      required:
+        - name
+        - description
+        - prompt
+      properties:
+        name:
+          title: App Name
+          type: string
+          description: A unique name for your application
+          ui:field: EntityName
+        description:
+          title: Description
+          type: string
+          description: A brief description of the application
+        prompt:
+          title: AI Prompt
+          type: string
+          description: >
+            Describe what you want the AI agent to build.
+            Be specific about the technology stack, features, and requirements.
+          ui:widget: textarea
+          ui:options:
+            rows: 6
+
+    - title: Agent Configuration
+      required:
+        - agent
+      properties:
+        agent:
+          title: AI Agent
+          type: string
+          description: Choose the AI agent to use
+          enum:
+            - opencode
+            - claude-code
+          enumNames:
+            - OpenCode
+            - Claude Code
+        model:
+          title: Model
+          type: string
+          description: >
+            Optional: Override the default model for this agent.
+            If left blank, the entity's annotation or sandboxd default is used.
+        memoryLimitMb:
+          title: Memory Limit (MB)
+          type: number
+          description: Maximum memory allocation for the sandbox
+          default: 512
+        runtime:
+          title: Runtime
+          type: string
+          description: Runtime environment for the sandbox
+          default: node
+          enum:
+            - node
+            - python
+            - java
+          enumNames:
+            - Node.js
+            - Python
+            - Java
+
+  steps:
+    # Step 1: Register the entity in the Backstage catalog with sandboxd annotations
+    - id: register-entity
+      name: Register Entity
+      action: catalog:register
+      input:
+        entityYaml:
+          apiVersion: backstage.io/v1alpha1
+          kind: Component
+          metadata:
+            name: ${{ parameters.name }}
+            description: ${{ parameters.description }}
+            annotations:
+              'sandboxd.backstage.io/sandboxd-enabled': 'true'
+              'sandboxd.backstage.io/runtime': ${{ parameters.runtime }}
+              'sandboxd.backstage.io/memory-limit-mb': ${{ parameters.memoryLimitMb }}
+              'sandboxd.backstage.io/auto-provision': 'true'
+              'sandboxd.backstage.io/agent-model': ${{ parameters.model }}
+          spec:
+            type: service
+            lifecycle: experimental
+            owner: ${{ user.entity.metadata.name || 'default' }}
+
+    # Step 2: Provision the sandbox via the sandboxd backend proxy
+    - id: provision-sandbox
+      name: Provision Sandbox
+      action: http:backstage:request
+      input:
+        method: POST
+        # The sandboxd backend proxy auto-provisions when the entity exists
+        # and has the auto-provision annotation
+        path: /api/sandboxd/v1/entities/${{ parameters.name }}/apps
+        headers:
+          Content-Type: application/json
+        body:
+          runtime: ${{ parameters.runtime }}
+          memoryLimitMb: ${{ parameters.memoryLimitMb }}
+
+    # Step 3: Create the AI agent task via the sandboxd backend proxy
+    - id: create-agent-task
+      name: Create Agent Task
+      action: http:backstage:request
+      input:
+        method: POST
+        path: /api/sandboxd/v1/entities/${{ parameters.name }}/tasks
+        headers:
+          Content-Type: application/json
+        body:
+          agent: ${{ parameters.agent }}
+          prompt: ${{ parameters.prompt }}
+          model: ${{ parameters.model }}
+
+  output:
+    links:
+      - title: View Entity
+        icon: catalog
+        url: /catalog/default/component/${{ parameters.name }}
+      - title: Open Sandboxd
+        icon: code
+        url: /catalog/default/component/${{ parameters.name }}/sandboxd

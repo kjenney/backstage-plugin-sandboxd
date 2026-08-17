@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: {{ name }}
+  description: "{{ name }}"
+  annotations:
+    sandboxd.backstage.io/preset-id: "{{ preset }}"
+    sandboxd.backstage.io/preview-url: ""
+    sandboxd.backstage.io/status: "stopped"
+  labels:
+    sandboxd-backstage: "true"
+spec:
+  type: service
+  owner: "{{ owner }}"
+  lifecycle: experimental

@@ -1,21 +1,23 @@
 /**
- * Backstage plugin for sandboxd integration.
+ * Frontend plugin for sandboxd integration in Backstage.
  *
  * @packageDocumentation
  */
 
-export { sandboxdPlugin, SandboxdRoot } from './plugin';
-export { SandboxdContent } from './components/SandboxdContent';
-export { AppCard, isSandboxdAvailable } from './components/AppCard';
-export { AppListView } from './components/AppListView';
-export { CodeEditor } from './components/CodeEditor';
-export { Terminal } from './components/Terminal';
-export { SettingsPanel } from './components/SettingsPanel';
 export {
-  SANDBOXD_ANNOTATIONS,
-  SANDBOXD_ANNOTATION_PREFIX,
-  parseSandboxdAnnotations,
-  type SandboxdEntityConfig,
-  type SandboxdAnnotationKey,
-} from './annotations';
-export { SandboxStatusWidget } from './components/SandboxStatusWidget';
+  sandboxdPlugin,
+  rootRouteRef,
+  entityContentRouteRef,
+  appStoreRouteRef,
+  SandboxdRoot,
+  SandboxdContent,
+  SandboxdAppStore,
+} from './plugin';
+
+// Phase 7: Authentication API hooks — resolve sandboxd identity from Backstage
+export {
+  useSandboxdAuth,
+  useSandboxdApiKey,
+  useSandboxdTenantId,
+  useSandboxdIsMultiTenant,
+} from './components/ApiKeyManagement/ApiKeyApi';

@@ -26,3 +26,5 @@ Thumbs.db
 
 # Yarn
 .yarnrc.yml
+# CocoIndex Code (ccc)
+/.cocoindex_code/

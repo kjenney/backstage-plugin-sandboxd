@@ -8,10 +8,10 @@ import {
   Grid,
   CircularProgress,
   Snackbar,
-  Alert,
   MenuItem,
   Divider,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { Save as SaveIcon } from '@material-ui/icons';
 import { useEntity } from '@backstage/plugin-catalog-react';
 import {

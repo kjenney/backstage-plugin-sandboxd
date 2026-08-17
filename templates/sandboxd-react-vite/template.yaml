@@ -1,0 +1,82 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: sandboxd-react-vite
+  title: React + Vite App (sandboxd)
+  description: >-
+    Scaffold a React + Vite application with sandboxd runtime annotations.
+    The app is automatically registered in the Backstage catalog and
+    provisioned into a sandboxd sandbox for preview and development.
+spec:
+  owner: sandboxd-team
+  type: service
+
+  parameters:
+    - title: Provide application details
+      required:
+        - name
+        - owner
+      properties:
+        name:
+          title: Application Name
+          type: string
+          description: Unique name for the application
+          ui:autofocus: true
+          ui:options:
+            rows: 1
+        owner:
+          title: Owner
+          type: string
+          description: Owner of the component (e.g., team:sandboxd)
+        preset:
+          title: sandboxd Preset
+          type: string
+          description: >-
+            The sandboxd runtime preset to use for this application.
+            Leave blank to use the default React preset.
+          enum:
+            - react-vite
+            - react-cra
+            - nextjs
+            - fastapi
+            - custom
+          default: react-vite
+
+    - title: Choose a repository
+      required:
+        - repoUrl
+      properties:
+        repoUrl:
+          title: Repository Location
+          type: string
+          ui:field: RepoPicker
+
+  steps:
+    - id: fetch-base
+      name: Fetch Base
+      action: fetch:template
+      input:
+        url: ./skeleton
+        values:
+          name: ${{ parameters.name }}
+          owner: ${{ parameters.owner }}
+          preset: ${{ parameters.preset }}
+
+    - id: publish
+      name: Publish
+      action: publish:backstage
+
+    - id: register
+      name: Register
+      action: catalog:register
+      input:
+        catalogInfoUrl: ./app-config.yaml
+
+  output:
+    links:
+      - title: Open in Catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
+      - title: Open in sandboxd
+        icon: sandboxd
+        url: ${{ steps.register.output.entityRef }}

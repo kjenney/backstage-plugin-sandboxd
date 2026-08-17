@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Page, Content } from '@backstage/core-components';
+import { Page, Content, ContentHeader, HeaderLabel } from '@backstage/core-components';
 import { SandboxdContent } from './SandboxdContent';
 
 /**
@@ -7,8 +7,10 @@ import { SandboxdContent } from './SandboxdContent';
  */
 export const SandboxdRoot = () => (
   <Page themeId="tool">
-    <Navbar title="Sandboxd" />
     <Content>
+      <ContentHeader title="Sandboxd">
+        <HeaderLabel label="Status" value="Active" />
+      </ContentHeader>
       <SandboxdContent />
     </Content>
   </Page>
