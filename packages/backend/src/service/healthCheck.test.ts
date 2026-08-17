@@ -40,7 +40,15 @@ describe('SandboxdHealthCheck', () => {
   describe('HTTP health check logic', () => {
     it('should return healthy=true when sandboxd returns 200', (done) => {
       // Mock a 200 response
-      const mockResponse = new http.IncomingMessage(new http.Agent()) as http.IncomingMessage;
+      // Using a duplex stream instead of http.Agent to avoid type mismatch with newer Node types
+      const mockSocket = {
+        write: jest.fn(),
+        setEncoding: jest.fn(),
+        pause: jest.fn(),
+        resume: jest.fn(),
+        connect: jest.fn(),
+      } as unknown as import('net').Socket;
+      const mockResponse = new http.IncomingMessage(mockSocket) as http.IncomingMessage;
       Object.defineProperty(mockResponse, 'statusCode', { value: 200 });
       Object.defineProperty(mockResponse, 'headers', { value: {} });
 
@@ -51,7 +59,14 @@ describe('SandboxdHealthCheck', () => {
 
     it('should return healthy=false when sandboxd returns non-200', (done) => {
       // Mock a 503 response
-      const mockResponse = new http.IncomingMessage(new http.Agent()) as http.IncomingMessage;
+      const mockSocket = {
+        write: jest.fn(),
+        setEncoding: jest.fn(),
+        pause: jest.fn(),
+        resume: jest.fn(),
+        connect: jest.fn(),
+      } as unknown as import('net').Socket;
+      const mockResponse = new http.IncomingMessage(mockSocket) as http.IncomingMessage;
       Object.defineProperty(mockResponse, 'statusCode', { value: 503 });
 
       // The health check logic: healthy = (statusCode === 200)

@@ -42,7 +42,7 @@ describe('createPreviewUrlHandler', () => {
         } as any,
       );
 
-      await handler(mockReq, mockRes);
+      await handler(mockReq, mockRes, jest.fn() as any);
 
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({ error: 'Missing appId parameter' });
@@ -73,7 +73,7 @@ describe('createPreviewUrlHandler', () => {
         } as any,
       );
 
-      await handler(mockReq, mockRes);
+      await handler(mockReq, mockRes, jest.fn() as any);
 
       expect(mockRes.status).toHaveBeenCalledWith(401);
       expect(mockRes.json).toHaveBeenCalledWith({
@@ -105,7 +105,7 @@ describe('createPreviewUrlHandler', () => {
         } as any,
       );
 
-      await handler(mockReq, mockRes);
+      await handler(mockReq, mockRes, jest.fn() as any);
 
       expect(mockRes.status).toHaveBeenCalledWith(401);
       expect(mockRes.json).toHaveBeenCalledWith({
@@ -117,41 +117,10 @@ describe('createPreviewUrlHandler', () => {
 
   describe('preview URL construction', () => {
     it('returns 404 when app has no preview URL', async () => {
-      const mockReq = {
-        params: { appId: 'app-123' },
-      } as any;
-
-      const mockRes = {
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn(),
-      } as any;
-
-      // Mock a 404 from sandboxd
-      const mockFetch = jest.fn().mockResolvedValue({
-        ok: false,
-        status: 404,
-        text: jest.fn().mockResolvedValue('Not found'),
-      });
-
-      const handler = createPreviewUrlHandler(
-        'http://localhost:9090',
-        'test-token',
-        {
-          getUserInfo: jest.fn().mockResolvedValue({ token: 'session-token' }),
-          resolveIdentity: jest.fn().mockResolvedValue({
-            tenantId: undefined,
-            apiKey: 'test-api-key',
-          }),
-          isMultiTenant: jest.fn().mockReturnValue(false),
-        } as any,
-        {
-          getOptionalNumber: jest.fn().mockReturnValue(3600),
-        } as any,
-      );
-
-      // Note: The handler uses node-fetch, so we'd need to mock that.
-      // This test verifies the expected 404 response structure.
-      const expectedResponse = {
+       // This test verifies the expected 404 response structure.
+       // The actual handler uses node-fetch to call sandboxd, which we'd need to mock.
+       // Here we verify the response structure pattern.
+       const expectedResponse = {
         error: 'Failed to fetch app from sandboxd',
         detail: 'Not found',
       };

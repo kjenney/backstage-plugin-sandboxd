@@ -37,16 +37,19 @@ jobs:
           npm ci --ignore-scripts || npm install --ignore-scripts
 
       - name: Build all packages
-        run: npx backstage-cli package build --all
+        run: |
+          npx tsc
+          npx backstage-cli package build --role frontend-plugin
+          npx backstage-cli package build --role backend-plugin
 
       - name: Run frontend tests
-        run: cd packages/frontend && npx backstage-cli package test --watchAll=false
+        run: npx backstage-cli package test --watchAll=false --role frontend-plugin
 
       - name: Run backend tests
-        run: cd packages/backend && npx backstage-cli package test --watchAll=false
+        run: npx backstage-cli package test --watchAll=false --role backend-plugin
 
       - name: Run lint
-        run: npx backstage-cli package lint --all
+        run: npx backstage-cli package lint --role frontend-plugin && npx backstage-cli package lint --role backend-plugin
 
   publish:
     name: Publish Plugin
@@ -69,7 +72,10 @@ jobs:
           npm ci --ignore-scripts || npm install --ignore-scripts
 
       - name: Build all packages
-        run: npx backstage-cli package build --all
+        run: |
+          npx tsc
+          npx backstage-cli package build --role frontend-plugin
+          npx backstage-cli package build --role backend-plugin
 
       - name: Publish frontend package
         run: |

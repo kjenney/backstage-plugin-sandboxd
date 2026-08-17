@@ -32,13 +32,13 @@ describe('createSseProxyHandler', () => {
 
       const handler = createSseProxyHandler({
         config: {
-          getString: (key: string) => 'http://localhost:9090',
-          getOptionalString: (key: string) => undefined,
-          getOptionalNumber: (key: string) => undefined,
+          getString: (_key: string) => 'http://localhost:9090',
+          getOptionalString: (_key: string) => undefined,
+          getOptionalNumber: (_key: string) => undefined,
         } as any,
       });
 
-      await handler(mockReq, mockRes);
+      await handler(mockReq, mockRes, jest.fn() as any);
 
       expect(mockRes.status).toHaveBeenCalledWith(400);
       expect(mockRes.json).toHaveBeenCalledWith({ error: 'Missing taskId parameter' });
@@ -47,7 +47,7 @@ describe('createSseProxyHandler', () => {
 
   describe('SSE response headers', () => {
     it('sets correct SSE headers', async () => {
-      const mockReq = {
+      const _mockReq = {
         params: { taskId: 'task-123' },
         on: jest.fn(),
       } as any;
@@ -61,11 +61,11 @@ describe('createSseProxyHandler', () => {
         end: jest.fn(),
       } as any;
 
-      const handler = createSseProxyHandler({
+      const _handler = createSseProxyHandler({
         config: {
-          getString: (key: string) => 'http://localhost:9090',
-          getOptionalString: (key: string) => undefined,
-          getOptionalNumber: (key: string) => undefined,
+          getString: (_key: string) => 'http://localhost:9090',
+          getOptionalString: (_key: string) => undefined,
+          getOptionalNumber: (_key: string) => undefined,
         } as any,
       });
 
@@ -86,7 +86,7 @@ describe('createSseProxyHandler', () => {
     it('writes error event when upstream returns non-200', async () => {
       // When the upstream sandboxd returns a non-200 status,
       // the proxy writes a data event with the error message
-      const mockReq = {
+      const _mockReq = {
         params: { taskId: 'task-123' },
         on: jest.fn(),
       } as any;
