@@ -9,7 +9,9 @@ import {
 } from '@material-ui/core';
 import { Save as SaveIcon } from '@material-ui/icons';
 import { useEntity } from '@backstage/plugin-catalog-react';
-import { EditorView, basicSetup } from 'codemirror';
+import { EditorView } from '@codemirror/view';
+import { Transaction } from '@codemirror/state';
+import { basicSetup } from '@codemirror/basic-setup';
 import { javascript } from '@codemirror/lang-javascript';
 import { python } from '@codemirror/lang-python';
 import { html } from '@codemirror/lang-html';
@@ -117,7 +119,7 @@ export const CodeEditor: React.FC = () => {
     const view = new EditorView({
       state,
       parent: editorRef.current,
-      dispatch: (tx) => {
+      dispatch: (tx: Transaction) => {
         view.update([tx]);
         if (tx.docChanged) {
           setEditorContent(view.state.doc.toString());

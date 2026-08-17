@@ -1,4 +1,3 @@
-import React from 'react';
 import { Page, Content, ContentHeader, HeaderLabel } from '@backstage/core-components';
 import { SandboxdContent } from './SandboxdContent';
 

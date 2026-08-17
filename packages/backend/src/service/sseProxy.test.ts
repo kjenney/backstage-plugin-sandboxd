@@ -47,10 +47,7 @@ describe('createSseProxyHandler', () => {
 
   describe('SSE response headers', () => {
     it('sets correct SSE headers', async () => {
-      const _mockReq = {
-        params: { taskId: 'task-123' },
-        on: jest.fn(),
-      } as any;
+        // mockReq not used in this test, just verify headers are set
 
       const mockRes = {
         status: jest.fn().mockReturnThis(),
@@ -61,7 +58,8 @@ describe('createSseProxyHandler', () => {
         end: jest.fn(),
       } as any;
 
-      const _handler = createSseProxyHandler({
+      // Handler not used in this test, just verify headers are set
+      createSseProxyHandler({
         config: {
           getString: (_key: string) => 'http://localhost:9090',
           getOptionalString: (_key: string) => undefined,
@@ -86,10 +84,7 @@ describe('createSseProxyHandler', () => {
     it('writes error event when upstream returns non-200', async () => {
       // When the upstream sandboxd returns a non-200 status,
       // the proxy writes a data event with the error message
-      const _mockReq = {
-        params: { taskId: 'task-123' },
-        on: jest.fn(),
-      } as any;
+        // mockReq not used in this test, just verify response writing
 
       const mockRes = {
         status: jest.fn().mockReturnThis(),
