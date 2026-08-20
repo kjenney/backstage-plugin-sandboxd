@@ -48,7 +48,7 @@ jobs:
         run: cd packages/backend && npx backstage-cli package test --watchAll=false
 
       - name: Run root lint
-        run: npx backstage-cli package lint 
+        run: npx backstage-cli package lint
         
       - name: Run backend lint
         run: cd packages/backend && npx backstage-cli package list 
@@ -72,7 +72,7 @@ jobs:
           node-version: 20.x
           registry-url: https://registry.npmjs.org
 
-      - name: Install dependencies:
+      - name: Install dependencies
         run: |
           npm ci --ignore-scripts || npm install --ignore-scripts
 
