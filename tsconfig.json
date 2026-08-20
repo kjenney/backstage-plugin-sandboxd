@@ -8,6 +8,8 @@
     "dist"
   ],
   "compilerOptions": {
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "outDir": "dist-types",
+    "rootDir": "."
   }
 }
