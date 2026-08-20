@@ -48,7 +48,7 @@ jobs:
         run: cd packages/backend && npx backstage-cli package test --watchAll=false
 
       - name: Run root lint
-        run: npx backstage-cli package lint
+        run: cd ../.. && npx backstage-cli package lint
         
       - name: Run backend lint
         run: cd packages/backend && npx backstage-cli package list 
