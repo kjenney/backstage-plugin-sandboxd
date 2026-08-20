@@ -1,4 +1,4 @@
 {
-  "extends": "@backstage/cli/config/.eslintrc.js",
+  "extends": "@backstage/cli/config/eslint.backend.js",
   "rules": {}
 }
