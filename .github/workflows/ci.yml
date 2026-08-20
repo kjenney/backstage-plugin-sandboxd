@@ -42,10 +42,10 @@ jobs:
           cd ../backend && npx backstage-cli package build --role backend-plugin
 
       - name: Run frontend tests
-        run: npx backstage-cli package test --watchAll=false --role frontend-plugin
+        run: npx backstage-cli package test --role frontend-plugin --watchAll=false
 
       - name: Run backend tests
-        run: npx backstage-cli package test --watchAll=false --role backend-plugin
+        run: npx backstage-cli package test --role backend-plugin --watchAll=false
 
       - name: Run lint
         run: npx backstage-cli package lint --role frontend-plugin && npx backstage-cli package lint --role backend-plugin
