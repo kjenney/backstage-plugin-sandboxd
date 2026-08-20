@@ -51,7 +51,7 @@ jobs:
         run: cd ../.. && npx backstage-cli package lint
         
       - name: Run backend lint
-        run: cd packages/backend && npx backstage-cli package list 
+        run: cd packages/backend && npx backstage-cli package lint
         
       - name: Run frontend lint
         run: cd packages/frontend && npx backstage-cli package lint
